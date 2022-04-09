@@ -17,7 +17,6 @@ class LineApiController extends Controller
         
     }
 
-    // Webhook受取処理
     public function sendMessage(Request $request) {
         // Lineトークン
         $token = 'HZCUz59zEdLHn6KxRInnF8epc56Ypv9lA4EUSTClv6J';
@@ -50,9 +49,7 @@ class LineApiController extends Controller
                 curl_close($ch);
             }
         }
-        
     }
-
 }
 
 

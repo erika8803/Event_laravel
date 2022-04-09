@@ -11,20 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-// Route::group(['prefix' => 'admin'], function() {
-//     Route::get('news/create', 'Admin\NewsController@add');
-// });
+Route::get('/', 'CalendarController@index');
 
-Route::group(['prefix' => 'user'], function() {
-    Route::get('events/index', 'EventsController@index');
-});
+Route::get('/events', 'EventsController@index');
+Route::get('/events/add', 'EventsController@add');
+Route::post('/events/add', 'EventsController@create');
+
+Route::get('/line', 'LineApiController@sendMessage');
+
+// Route::group(['prefix' => 'user'], function() {
+//     Route::get('/', 'Admin\NewsController@add')->middleware('auth');
+// });
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::group(['prefix' => 'user'], function() {
-    Route::get('/', 'Admin\NewsController@add')->middleware('auth');
-});
