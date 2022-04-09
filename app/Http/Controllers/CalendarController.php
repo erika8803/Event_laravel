@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 //追加
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 use App\Event;
 
 
@@ -24,7 +24,6 @@ class CalendarController extends Controller
 
         if( isset($form['yearMonth'])) {
             $yearMonth = $form['yearMonth'];
-
         } else {
             $yearMonth = date('Y-m');
         }
@@ -38,6 +37,9 @@ class CalendarController extends Controller
             $yearMonth = date('Y-m', strtotime (' +1 month', strtotime($yearMonth)));
         }
 
+        // Modelからデータを取得する
+        $events = Event::get()->sortBy('date')->toArray();
+
         // カレンダー作成
         $calendar = [];
         $displayNum = 0;
@@ -50,26 +52,56 @@ class CalendarController extends Controller
         for ($dayLoop = 1; $dayLoop <= $lastDay; $dayLoop++) {
             // 週の始まりが日曜じゃない場合、配列に空を入れる
             if( 1 == $dayLoop ) {
-                for( $firstWeekLoop = 0; $firstWeekLoop <= $weekNumFirstDay ; $firstWeekLoop++ ) {
+                for( $firstWeekLoop = 0; $firstWeekLoop < $weekNumFirstDay; $firstWeekLoop++ ) {
                     $calendar[$displayNum]['day'] = '';
+                    $calendar[$displayNum]['weekNum'] = '';
+                    $calendar[$displayNum]['Y-m-d'] = '';
                     $displayNum++;
                 }
             }
+            
             $calendar[$displayNum]['day'] = $dayLoop;
+            $calendar[$displayNum]['weekNum'] = date('w', strtotime($yearMonth . '-' . $dayLoop));
+            $calendar[$displayNum]['Y-m-d'] = date('Y-m-d', strtotime($yearMonth . '-' . $dayLoop));
             $displayNum++;
             
             // 週の終わりが土曜じゃない場合、配列に空を入れる
             if( $lastDay == $dayLoop ) {
-                for( $lastWeekLoop = 0; $lastWeekLoop <= $weekNumLastDay; $lastWeekLoop++ ) {
+                for( $lastWeekLoop = 0; $lastWeekLoop < 6 - $weekNumLastDay; $lastWeekLoop++ ) {
                     $calendar[$displayNum]['day'] = '';
+                    $calendar[$displayNum]['weekNum'] = '';
+                    $calendar[$displayNum]['Y-m-d'] = '';
                     $displayNum++;
                 }
             }
         }
 
+
+        $displayCalendar = [];
+
+
+        foreach ($calendar as $calkey => $cal ) {
+            foreach( $events as $key => $event ) {
+                if($cal['Y-m-d'] == $event['date'] ){
+                    $displayCalendar[$event['date']][] = $event['title'];
+                }
+            }
+            
+        }
+$i = 0;
+        foreach($calendar as $key => $cal) {
+            foreach( $displayCalendar as $key => $discal ){
+             $i++;
+                var_dump($discal[$i]);
+            }
+        }
+
+
+    
         return view('calendar.index', [
             'yearMonth' => $yearMonth,
             'calendar' => $calendar,
+            'events' => $events,
         ]);
 
     }

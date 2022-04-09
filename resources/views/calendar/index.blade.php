@@ -22,15 +22,20 @@
                 <th>金</th>
                 <th>土</th>
             </tr>
-            @foreach( $calendar as $key => $day)
             <tr>
+                @foreach( $calendar as $key => $day)
                 <td>{{ $day['day'] }}</td>
-                @if( $key == '7')
-                </tr>
-                <tr>
-                @endif
-            @endforeach
+                    @if ( $day['weekNum'] == 6 )
+                    </tr>
+                    <tr>
+                    @endif
+                @endforeach
             </tr>
+            
         </table>
     </div>
 @endsection
+
+
+
+
