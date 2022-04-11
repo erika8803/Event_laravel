@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace EventApp\Http\Controllers;
 
 use Illuminate\Http\Request;
 //追加
 use Illuminate\Support\Facades\Auth;
-use App\Event;
+use EventApp\Event;
 
 
 class CalendarController extends Controller

@@ -22,6 +22,7 @@ Route::post('/events/edit', 'EventsController@update');
 Route::get('/events/delete', 'EventsController@delete');
 
 Route::get('/line', 'LineApiController@sendMessage');
+Route::get('/linesend', 'LineApiController@pushSend');
 
 // Route::group(['prefix' => 'user'], function() {
 //     Route::get('/', 'Admin\NewsController@add')->middleware('auth');

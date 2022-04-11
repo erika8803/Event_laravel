@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace EventApp\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-use App\Events;
+use EventApp\Event;
 
 class LineApiController extends Controller
 {
@@ -17,18 +17,48 @@ class LineApiController extends Controller
         
     }
 
+    public function pushSend(Request $request) {
+        // Lineトークン
+        $token = '';
+
+        $event = Event::find($request->id)->toArray();
+        $message = "【日付】" . $event["date"] ."【タイトル】" . $event['title'] . "【詳細】" . $event['comment'];
+        // $message .= $event['comment'];
+  
+        $query = http_build_query(['message' => $message ]);
+        $header = [
+                'Content-Type: application/x-www-form-urlencoded',
+                'Authorization: Bearer ' . $token,
+                'Content-Length: ' . strlen($query)
+        ];
+        $ch = curl_init('https://notify-api.line.me/api/notify');
+        $options = [
+            CURLOPT_RETURNTRANSFER  => true,
+            CURLOPT_POST            => true,
+            CURLOPT_HTTPHEADER      => $header,
+            CURLOPT_POSTFIELDS      => $query,
+            CURLINFO_HEADER_OUT => true,
+        ];
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt_array($ch, $options);
+        curl_exec($ch);
+
+        return redirect('events');
+
+    }
+
     public function sendMessage(Request $request) {
         // Lineトークン
-        $token = 'HZCUz59zEdLHn6KxRInnF8epc56Ypv9lA4EUSTClv6J';
+        $token = '';
 
-        $events = Events::latest()->get();
+        $events = Event::latest()->get();
         foreach($events as $key => $event) {
             $today = date('Y-m-d');
             
             $day = date("Y-m-d", strtotime($event['date']));
             if( $today == $day ) {
-                $message = "【タイトル】" . $event['title'] . "【詳細】";
-                $message .= $event['comment'];
+                $message = "【日付】". 
+                $event['date'] . "【タイトル】" . $event['title'] . "【詳細】" . $event['comment'];;
                 $query = http_build_query(['message' => $message ]);
                 $header = [
                         'Content-Type: application/x-www-form-urlencoded',
