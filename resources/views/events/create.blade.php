@@ -3,18 +3,7 @@
 
 @section('content')
     <div class="container">
-        <div class="">
-            <p>イベント登録</p>
-        </div>
-  
-        <form action="{{ action('EventsController@create') }}" method="post">
-        @if (count($errors) > 0)
-            <ul>
-                @foreach($errors->all() as $e)
-                    <li>{{ $e }}</li>
-                @endforeach
-            </ul>
-        @endif
+        <div class="row">
             <table>
                 <tr>
                     <th class="col-md-3">日付</th>
@@ -52,16 +41,6 @@
                     </td>
                 </tr> -->
             </tabel>
-            {{ csrf_field() }}
-            <input type="hidden" class="form-control-file" name="group" value="1">
-            <input type="hidden" class="form-control-file" name="user_id" value="{{ $user_id }}">
-        <div class="col-md-6">
-            <input type="submit" class="form-control-file" value="登録">
         </div>
-    </form>
-        
     </div>
 @endsection
-
-
-

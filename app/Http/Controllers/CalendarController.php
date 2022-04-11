@@ -76,27 +76,6 @@ class CalendarController extends Controller
             }
         }
 
-
-        $displayCalendar = [];
-
-
-        foreach ($calendar as $calkey => $cal ) {
-            foreach( $events as $key => $event ) {
-                if($cal['Y-m-d'] == $event['date'] ){
-                    $displayCalendar[$event['date']][] = $event['title'];
-                }
-            }
-            
-        }
-$i = 0;
-        foreach($calendar as $key => $cal) {
-            foreach( $displayCalendar as $key => $discal ){
-             $i++;
-                var_dump($discal[$i]);
-            }
-        }
-
-
     
         return view('calendar.index', [
             'yearMonth' => $yearMonth,

@@ -17,6 +17,10 @@ Route::get('/events', 'EventsController@index');
 Route::get('/events/add', 'EventsController@add');
 Route::post('/events/add', 'EventsController@create');
 
+Route::get('/events/edit', 'EventsController@edit');
+Route::post('/events/edit', 'EventsController@update');
+Route::get('/events/delete', 'EventsController@delete');
+
 Route::get('/line', 'LineApiController@sendMessage');
 
 // Route::group(['prefix' => 'user'], function() {

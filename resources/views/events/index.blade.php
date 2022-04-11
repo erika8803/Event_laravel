@@ -15,9 +15,19 @@
                 </tr>
                 @foreach($events as $key => $event)
                 <tr>
-                    <td>{{ $event->date }}</td>
-                    <td>{{ $event->title }}</td>
-                    <td>{{ $event->comment }}</td>
+                    <td>
+                        {{ $event->date }}
+                    </td>
+                    <td>
+                        <a href="{{ action('EventsController@update', ['id' => $event->id]) }}">
+                            {{ $event->title }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ action('EventsController@update', ['id' => $event->id]) }}">
+                        {{ $event->comment }}
+                        </a>
+                    </td>
                 </tr>
                 @endforeach
             </tabel>

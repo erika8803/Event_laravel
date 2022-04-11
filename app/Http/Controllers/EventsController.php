@@ -23,12 +23,10 @@ class EventsController extends Controller
     public function add()
     {
         $user_id = Auth::id();
-
         return view('events.add', ['user_id' => $user_id ]);
     }
 
-    public function create(Request $request)
-    {
+    public function create(Request $request) {
 
         // Varidationを行う
         $this->validate($request, Event::$rules);
@@ -46,5 +44,38 @@ class EventsController extends Controller
 
         return redirect('events');
     }
+
+    public function edit(Request $request) {
+        $event = Event::find($request->id);
+        if (empty($event)) {
+            abort(404);
+        }
+        return view('events.edit', ['event' => $event]);
+    }
+
+
+    public function update(Request $request)
+    {
+        $this->validate($request, Event::$rules);
+        $events = Event::find($request->id);
+        // 送信されてきたフォームデータを格納する
+        $edit_form = $request->all();
+
+        unset($edit_form['_token']);
+
+        // 該当するデータを上書きして保存する
+        $events->fill($edit_form)->save();
+        return redirect('/events');
+    }
+
+    public function delete(Request $request)
+    {
+        $events = Event::find($request->id);
+        // 削除する
+        $events->delete();
+        return redirect('events');
+    } 
+
+
 
 }
