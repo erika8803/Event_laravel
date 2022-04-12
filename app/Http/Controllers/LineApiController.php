@@ -42,7 +42,9 @@ class LineApiController extends Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt_array($ch, $options);
         curl_exec($ch);
-        return redirect('events');
+
+        return redirect('events')->with('message', 'Lineに通知しました！'); 
+
     }
 
     public function sendMessage(Request $request) {

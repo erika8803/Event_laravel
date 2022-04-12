@@ -15,20 +15,20 @@
                 @endif
                     <table>
                         <tr>
-                            <th class="col-md-3">日付</th>
-                            <td class="col-md-8">
+                            <th class="">日付</th>
+                            <td class="">
                                 <input type="date" class="form-control" name="date" rows="7" value="{{ $event->date }}">
                             </td>
                         </tr>
                         <tr>
-                            <th class="col-md-3">イベント名</th>
-                            <td class="col-md-8">
+                            <th class="">イベント名</th>
+                            <td class="">
                             <input type="text" class="form-control" name="title" rows="7" value="{{ $event->title }}">
                         </td>
                         </tr>
                         <tr>
-                            <th class="col-md-3">イベント詳細</th>
-                            <td class="col-md-8">
+                            <th class="">イベント詳細</th>
+                            <td class="">
                                 <textarea class="form-control" name="comment" rows="7">{{ $event->comment }}</textarea>
                             </td>
                         </tr>
