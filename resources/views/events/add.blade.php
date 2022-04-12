@@ -18,19 +18,19 @@
             @endif
                 <table>
                     <tr>
-                        <th class="col-md-3">日付</th>
+                        <th class="">日付</th>
                         <td class="">
                             <input type="date" class="form-control" name="date" rows="7">{{ old('date') }}
                         </td>
                     </tr>
                     <tr>
-                        <th class="col-md-3">イベント名</th>
+                        <th class="">イベント名</th>
                         <td class="">
                         <input type="text" class="form-control" name="title" rows="7">{{ old('title') }}
                     </td>
                     </tr>
                     <tr>
-                        <th class="col-md-3">イベント詳細</th>
+                        <th class="">イベント詳細</th>
                         <td class="">
                             <textarea class="form-control" name="comment" rows="7">{{ old('comment') }}</textarea>
                         </td>

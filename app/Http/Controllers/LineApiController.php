@@ -42,7 +42,7 @@ class LineApiController extends Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt_array($ch, $options);
         curl_exec($ch);
-
+        return redirect('events');
     }
 
     public function sendMessage(Request $request) {
@@ -77,6 +77,7 @@ class LineApiController extends Controller
                 curl_close($ch);
             }
         }
+        return redirect('events');
     }
 }
 
