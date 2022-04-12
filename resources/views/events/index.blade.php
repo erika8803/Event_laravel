@@ -10,9 +10,10 @@
             <div>
                 <table class="table table-bordered">
                     <tr>
-                        <th class="col-md-3">日付</th>
-                        <th class="col-md-3">イベント名</th>
-                        <th class="col-md-3">イベント詳細</th>
+                        <th class="">日付</th>
+                        <th class="">イベント名</th>
+                        <th class="">イベント詳細</th>
+                        <th class=""></th>
                     </tr>
                     @foreach($events as $key => $event)
                     <tr>

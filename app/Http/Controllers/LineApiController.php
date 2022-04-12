@@ -19,7 +19,7 @@ class LineApiController extends Controller
 
     public function pushSend(Request $request) {
         // Lineトークン
-        $token = 'HZCUz59zEdLHn6KxRInnF8epc56Ypv9lA4EUSTClv6J';
+        $token = 'mDjzgraap4yNujy4IO2Ys1IbG7oiGkyPWDNKBVZoYUM';
 
         $event = Event::find($request->id)->toArray();
         $message = "【日付】" . $event["date"] ."【タイトル】" . $event['title'] . "【詳細】" . $event['comment'];
@@ -47,7 +47,7 @@ class LineApiController extends Controller
 
     public function sendMessage(Request $request) {
         // Lineトークン
-        $token = 'HZCUz59zEdLHn6KxRInnF8epc56Ypv9lA4EUSTClv6J';
+        $token = 'mDjzgraap4yNujy4IO2Ys1IbG7oiGkyPWDNKBVZoYUM';
 
         $events = Event::latest()->get();
         foreach($events as $key => $event) {
